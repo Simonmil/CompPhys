@@ -6,9 +6,6 @@
 
 using namespace std;
 
-/* What is the best way to declare an array and a matrix?
- */
-
 void fi(double **f, int n){
     /* We are filling the array f with values from the function that is given
      */
@@ -71,10 +68,19 @@ void generalAlgorithm( double* A[], double* f[], double **f_d_tilde, int n){
 }
 
 int main()
-{   /*
-    rows = 10;
-    int **A = new int*[rows];
-    */
+{   /* Creating a matrix, A. How to make a matrix?
+      A = ?
+      Cerating an array, f. How to make an array?
+      f = ?
+      Calling the functions here. What is the correct way of calling a function?
+      */
+    int n = 100;
+
+    fi(f,n);
+
+    f_d_tilde = ?;
+    generalAlgorithm(A,f,f_d_tilde,n);
+
     return 0;
 
 }
