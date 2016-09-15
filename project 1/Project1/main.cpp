@@ -3,83 +3,87 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstdio>
+#include <cmath>
 
 using namespace std;
 
-void fi(double **f, int n){
-    /* We are filling the array f with values from the function that is given
-     */
-    int i;
-    /* Defining the step-length h
-     */
-    int h = 1/(n+1);
+double SourceTerm(double x){
+    return 100*exp(-10*x);
+}
 
-    for(i=0;i<n;i++){
-        /*is this the correct way of calling the values in f?
-         * Will this update f that is outside the function?
-         * Is it correct to call exp just like that? Or do we need to #include some library?
-         */
-        f[i] = (h**2)*100*exp(-10*(i*h));
+double uExact(double x) {
+
+   return 1 - (1 - exp(-10))*x - exp(-10*x);
+}
+
+void generalAlgorithm(double* a, double* b, double* c, double* f, double* v, int n){
+    // This general algorithm solves the system -u'' = f, u(0) = u(1) = 0.
+
+    // Initial condition force us to set these to zero
+    a[0] = 0; b[0] = 0; c[0] = 0; f[0] = 0; v[0] = 0;
+    a[n+1] = 0; b[n+1] = 0; c[n+1] = 0; f[n+1] = 0; v[n+1] = 0;
+
+
+    for(int i=2; i < n+1; i++){
+        b[i] = b[i] - a[i-1]*c[i-1]/b[i-1];
+
+        f[i] = f[i] - a[i-1]*f[i-1]/b[i-1];
+
+    }
+    v[n] = f[n]/b[n];
+    for(int i=n-1; i > 0; i--){
+        v[i] = f[i] - (c[i][i+1]*v[i+1])/b[i];
     }
 }
 
-void generalAlgorithm( double* A[], double* f[], double **f_d_tilde, int n){
-    /*In this function we are going to solve the linear system Ax=f.
-     * We use the general algorithm for a n x n tridiagonal matrix A.
-     */
-
-
-    /* void or double[]? How does return work in c++
-     * Are the inputs correct? Is double* A[] a matrix?
-     * Does double **f_d_tilde mean that we only make changes in f_d_tilde?
-     * Does double **f_d_tilde mean that I can send in f_d_tilde as anything, as long as it works in the function?
-     */
-    int i;
-    /* Is A[0][0] the correct way of calling the numbers? Or is it a better way to extract the numbers from the matrix A?
-     */
-
-    double b_init = A[0][0];
-    double f_start = f[0]; //correct way to call the initial value?
-    /* How do we declare an array?
-     */
-
-
-    double b_tilde[n];
-    b_tilde[0] = b_init;
-
-
-    double f_tilde[n];
-    f_tilde[0] = f_start;
-
-    for(i=1; i < n; i++){
-        b_tilde[i] = A[i][i] - A[i][i-1]*A[i-1][i]/b_tilde[i-1];
-
-        f_tilde[i] = f[i] - A[i][i-1]*f_tilde[i-1]/b_tilde[i-1];
-
+double RelError(double* v, double (uExact)(double),int n) {
+    double* epsilon = new double[n+2];
+    for(int i=0;i<n+2;i++) {
+        epsilon[i] = log10(abs((v[i] - uExact[i]/uExact[i])));
     }
-    f_d_tilde[n-1] = f_tilde[n-1]/b_tilde[n-1];
-    for(i=n-2; i >= 0; i--){
-        f_d_tilde[i] = (A[i][i+1]*f_d_tilde[i+1]/b_tilde[i+1])/b_tilde[i];
-    }
-    /*We hope that f_d_tilde is now returned, because this is the solution we want.
-     */
 
+}
+
+void FirstDerivative(double* a, double* b, double* c, double* f, double (SourceTerm)(double), int n){
+    double h = 1.0/(n+1);
+
+    for(int i=0;i<n+2;i++){
+        b[i] = 2;
+        c[i] = -1;
+        a[i] = -1;
+        f[i] = h*h*SourceTerm(i*h);
+    }
+
+}
+
+void SecondDerivative(double* a, double* b, double* c, double* f, double (SourceTerm)(double), int n){
+    double h = 1.0/(n+1);
+
+    for(int i=0;i<n+2;i++){
+        b[i] = 2;
+        c[i] = -1;
+        a[i] = -1;
+        f[i] = h*h*SourceTerm(i*h);
+    }
 
 }
 
 int main()
-{   /* Creating a matrix, A. How to make a matrix?
-      A = ?
-      Cerating an array, f. How to make an array?
-      f = ?
-      Calling the functions here. What is the correct way of calling a function?
-      */
-    int n = 100;
+{
+    int n = 10;
 
-    fi(f,n);
+    double* b = new double[n+2]; // dette oppretter en dynamisk allokert array.
+    double* c = new double[n+2];
+    double* a = new double[n+2];
+    double* f = new double[n+2];
+    double* v = new double[n+2];
 
-    f_d_tilde = ?;
-    generalAlgorithm(A,f,f_d_tilde,n);
+    // FirstDerivative(a, b, c, f, n)
+
+    // SecondDerivative(a, b, c, f, n)
+
+    // generalAlgorithm(a, b, c, f, v, n)
+
 
     return 0;
 
