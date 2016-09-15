@@ -32,16 +32,16 @@ void generalAlgorithm(double* a, double* b, double* c, double* f, double* v, int
     }
     v[n] = f[n]/b[n];
     for(int i=n-1; i > 0; i--){
-        v[i] = f[i] - (c[i][i+1]*v[i+1])/b[i];
+        v[i] = f[i] - (c[i+1]*v[i+1])/b[i];
     }
 }
 
 double RelError(double* v, double (uExact)(double),int n) {
     double* epsilon = new double[n+2];
     for(int i=0;i<n+2;i++) {
-        epsilon[i] = log10(abs((v[i] - uExact[i]/uExact[i])));
+        epsilon[i] = log10(abs((v[i] - uExact(i)/uExact(i))));
     }
-
+    return 0;
 }
 
 void FirstDerivative(double* a, double* b, double* c, double* f, double (SourceTerm)(double), int n){
@@ -82,7 +82,7 @@ int main()
 
     // SecondDerivative(a, b, c, f, n)
 
-    // generalAlgorithm(a, b, c, f, v, n)
+    // generalAlgorithm(a, b, c, f, v, n);
 
 
     return 0;
