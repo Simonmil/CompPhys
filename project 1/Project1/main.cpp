@@ -1,11 +1,9 @@
 #include <iostream>
-#include <new>
-#include <cstdio>
-#include <cstdlib>
-#include <cstdio>
-#include <cmath>
+
+#include "time.h"
 
 using namespace std;
+
 
 double SourceTerm(double x){
     return 100*exp(-10*x);
