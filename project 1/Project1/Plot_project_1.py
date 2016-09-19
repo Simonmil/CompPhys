@@ -40,4 +40,3 @@ figure(3)
 pl.plot(x,y,'r-')
 pl.xlabel('Grid points')
 pl.ylabel('v(x)')
-
