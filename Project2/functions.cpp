@@ -36,7 +36,7 @@ void writeEigVal(double** A, int N, int rho_max, double rho_min, int iterations,
     // Function for writing eigenvalues to file
 
     ofstream data;
-    data.open(folder_path + "/eigen_values_N" + to_string(N) + "rhomax" + to_string(rho_max) + "numelec" + to_string(num_elec) + ".txt");
+    data.open(folder_path + "/values_eigen_N" + to_string(N) + "rhomax" + to_string(rho_max) + "numelec" + to_string(num_elec) + ".txt");
     data << "rho_max: " << rho_max << endl;
     data << "rho_min: " << rho_min << endl;
     data << "iterations: " << iterations << endl;
@@ -47,7 +47,7 @@ void writeEigVal(double** A, int N, int rho_max, double rho_min, int iterations,
         data << setw(5) << A[i][i] << " " << endl;
     }
     data.close();
-    cout << folder_path << "/eigen_values_N" << to_string(N) << "rhomax" << to_string(rho_max) << "numelec" << to_string(num_elec) << ".txt" << " written" << endl;
+    cout << folder_path << "/values_eigen_N" << to_string(N) << "rhomax" << to_string(rho_max) << "numelec" << to_string(num_elec) << ".txt" << " written" << endl;
     return;
 }
 
@@ -55,7 +55,7 @@ void writeEigVec(double** R, int N, int rho_max, const string& folder_path,int n
     // Function for writing eigenvectors to file
 
     ofstream data;
-    data.open(folder_path + "/eigen_vector_N" + to_string(N) + "rhomax" + to_string(rho_max) + "numelec" + to_string(num_elec) + ".txt");
+    data.open(folder_path + "/vector_eigen_N" + to_string(N) + "rhomax" + to_string(rho_max) + "numelec" + to_string(num_elec) + ".txt");
 
     for (int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
@@ -64,7 +64,7 @@ void writeEigVec(double** R, int N, int rho_max, const string& folder_path,int n
         data << endl;
     }
     data.close();
-    cout << folder_path << "/eigen_vectors_N" << to_string(N) << "rhomax" << to_string(rho_max) << "numelec" << to_string(num_elec) << ".txt" << " written" << endl;
+    cout << folder_path << "/vector_eigen_N" << to_string(N) << "rhomax" << to_string(rho_max) << "numelec" << to_string(num_elec) << ".txt" << " written" << endl;
     return;
 }
 
