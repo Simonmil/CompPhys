@@ -2,7 +2,6 @@
 #include <cmath>
 #include <fstream>
 #include <iomanip>
-#include <armadillo>
 #include <string>
 #include "time.h"
 #include "jacobi.h"
@@ -10,7 +9,6 @@
 
 
 using namespace std;
-using namespace arma;
 
 
 
@@ -106,9 +104,14 @@ int main(int argc, char *argv[]){
 
     // Writing eigenvalues and eigenvectors
 
-    writeEigVal(A,N,rho_max,rho_min,iterations,eps,folder_path,num_elec);
-    writeEigVec(R,N,rho_max,folder_path,num_elec);
-
+    if (num_elec == 2){
+        writeEigValTwoElec(A,N,rho_max,rho_min,iterations,eps,folder_path, omega_r);
+        writeEigVecTwoElec(R,N,rho_max,folder_path,omega_r);
+    }
+    else{
+        writeEigVal(A,N,rho_max,rho_min,iterations,eps,folder_path,num_elec);
+        writeEigVec(R,N,rho_max,folder_path,num_elec);
+    }
 
     // Deallocation of memory
 
