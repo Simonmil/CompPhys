@@ -1,0 +1,1 @@
+Arma:      N   400rho_min     0 rho_max     5 Time:         70 ms/n
