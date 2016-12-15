@@ -5,7 +5,8 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     jacobi.cpp \
-    functions.cpp
+    functions.cpp \
+    unittest.cpp
 
 INCLUDEPATH += C:\armadillo\include\
 DEPENDPATH += C:\armadillo\include\
@@ -15,4 +16,5 @@ LIBS += -LC:/armadillo/newblas -lliblapack
 
 HEADERS += \
     jacobi.h \
-    functions.h
+    functions.h \
+    unittest.h

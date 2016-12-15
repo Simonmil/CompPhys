@@ -34,9 +34,9 @@ void printEigVal(double** A, int N){
 
 void writeEigVal(double** A, int N, int rho_max, int rho_min, int iterations, double eps, const string& folder_path, int num_elec){
     // Function for writing eigenvalues to file
-
+    std::setprecision(2);
     ofstream data;
-    data.open(folder_path + "/values_eigen_N" + to_string(N) + "rhomax" + to_string(rho_max) + "numelec" + to_string(num_elec) + ".txt");
+    data.open(folder_path + "/val_eig_N" + to_string(N) + "rm" + to_string(rho_max) + "nel" + to_string(num_elec) + ".txt");
     data << "rho_max: " << rho_max << endl;
     data << "rho_min: " << rho_min << endl;
     data << "iterations: " << iterations << endl;
@@ -47,7 +47,7 @@ void writeEigVal(double** A, int N, int rho_max, int rho_min, int iterations, do
         data << setw(5) << A[i][i] << " " << endl;
     }
     data.close();
-    cout << folder_path << "/values_eigen_N" << to_string(N) << "rhomax" << to_string(rho_max) << "numelec" << to_string(num_elec) << ".txt" << " written" << endl;
+    cout << folder_path << "/val_eig_N" << to_string(N) << "rm" << std::setprecision(2) << to_string(rho_max) << "nel" << to_string(num_elec) << ".txt" << " written" << endl;
     return;
 }
 
@@ -55,7 +55,7 @@ void writeEigVec(double** R, int N, int rho_max, const string& folder_path,int n
     // Function for writing eigenvectors to file
 
     ofstream data;
-    data.open(folder_path + "/vector_eigen_N" + to_string(N) + "rhomax" + to_string(rho_max) + "numelec" + to_string(num_elec) + ".txt");
+    data.open(folder_path + "/vec_eig_N" + to_string(N) + "rm" + to_string(rho_max) + "nel" + to_string(num_elec) + ".txt");
 
     for (int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
@@ -64,27 +64,27 @@ void writeEigVec(double** R, int N, int rho_max, const string& folder_path,int n
         data << endl;
     }
     data.close();
-    cout << folder_path << "/vector_eigen_N" << to_string(N) << "rhomax" << to_string(rho_max) << "numelec" << to_string(num_elec) << ".txt" << " written" << endl;
+    cout << folder_path << "/vec_eig_N" << to_string(N) << "rm" << to_string(rho_max) << "nel" << to_string(num_elec) << ".txt" << " written" << endl;
     return;
 }
 
 
 void writeEigValTwoElec(double** A, int N, int rho_max, int rho_min, int iterations, double eps, const string& folder_path, double omega_r){
     // Function for writing eigenvalues to file
-
+    std::setprecision(2);
     ofstream data;
-    data.open(folder_path + "/values_eigen_N" + to_string(N) + "rhomax" + to_string(rho_max) + "omega_r" + to_string(omega_r) + ".txt");
+    data.open(folder_path + "/val_eig_N" + to_string(N) + "rm" + to_string(rho_max) + "o_r" + to_string(omega_r) + ".txt");
     data << "rho_max: " << rho_max << endl;
     data << "rho_min: " << rho_min << endl;
     data << "iterations: " << iterations << endl;
     data << "N: " << N << endl;
-    data << "eps: " << eps << endl;
+    data << "Omega_r: " << omega_r << endl;
 
     for (int i = 0; i < N; i++){
         data << setw(5) << A[i][i] << " " << endl;
     }
     data.close();
-    cout << folder_path << "/values_eigen_N" << to_string(N) << "rhomax" << to_string(rho_max) << "omega_r" << to_string(omega_r) << ".txt" << " written" << endl;
+    cout << folder_path << "/val_eig_N" << to_string(N) << "rm" << to_string(rho_max) << "o_r" << to_string(omega_r) << ".txt" << " written" << endl;
     return;
 }
 
@@ -92,7 +92,7 @@ void writeEigVecTwoElec(double** R, int N, int rho_max, const string& folder_pat
     // Function for writing eigenvectors to file
 
     ofstream data;
-    data.open(folder_path + "/vector_eigen_N" + to_string(N) + "rhomax" + to_string(rho_max) + "omega_r" + to_string(omega_r) + ".txt");
+    data.open(folder_path + "/vec_eig_N" + to_string(N) + "rm" + to_string(rho_max) + "o_r" + to_string(omega_r) + ".txt");
 
     for (int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
@@ -101,7 +101,7 @@ void writeEigVecTwoElec(double** R, int N, int rho_max, const string& folder_pat
         data << endl;
     }
     data.close();
-    cout << folder_path << "/vector_eigen_N" << to_string(N) << "rhomax" << to_string(rho_max) << "omega_r" << to_string(omega_r) << ".txt" << " written" << endl;
+    cout << folder_path << "/vec_eig_N" << to_string(N) << "rm" << to_string(rho_max) << "o_r" << to_string(omega_r) << ".txt" << " written" << endl;
     return;
 }
 

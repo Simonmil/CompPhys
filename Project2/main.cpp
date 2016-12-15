@@ -6,7 +6,7 @@
 #include "time.h"
 #include "jacobi.h"
 #include "functions.h"
-
+#include "unittest.h"
 
 using namespace std;
 
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     // Timer function
 
     std::ofstream timeit;
-    timeit.open(folder_path + "/times/timeit.txt", std::ios_base::app);
+    timeit.open(folder_path + "/timeit.txt", std::ios_base::app);
     //timeit.open(folder_path + "/timeit_N" + to_string(N) + "_rhomax" + rho_max + ".txt");
 
     // iteraion limits
@@ -122,6 +122,19 @@ int main(int argc, char *argv[]){
     delete [] A;
     delete [] R;
     delete [] V;
+
+    bool pass = true;
+    int passes = 0;
+
+    passes += TestJacobiRotation(pass);
+    passes += TestOrthogonality(pass);
+
+
+
+    if(passes == 2){
+        cout << "All test passed" << endl;
+    }
+    else{
+        cout << "A test has failed" << endl;
+    }
 }
-
-
